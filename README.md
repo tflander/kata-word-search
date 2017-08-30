@@ -67,7 +67,7 @@ UHURA: (4,0),(3,1),(2,2),(1,3),(0,4)
 
 *As the Puzzle Solver*<br />
 *I want to search backwards*<br />
-*So that I can find words in reverse along all axises*<br />
+*So that I can find words in reverse along all axes*<br />
 
 ## FAQ ##
 
