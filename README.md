@@ -1,3 +1,5 @@
+To run:  ./gradle2 run
+
 Word Search Kata
 ================
 In this exercise you will build a program to complete a [word search](https://en.wikipedia.org/wiki/Word_search) problem.
