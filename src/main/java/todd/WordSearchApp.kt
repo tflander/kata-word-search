@@ -1,7 +1,7 @@
 package todd
 
 fun main(args: Array<String>) {
-    println("foo")
+    println("boardLines")
 }
 
 class WordSearchApp {
