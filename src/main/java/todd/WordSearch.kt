@@ -34,23 +34,23 @@ class GridAnalyzer(val grid: List<List<String>>) {
 
     fun find(word: String): List<Pair<Int, Int>> {
         val startingCoordinates = coordinatesForFirstLetterInWord(word)
+        val direction = Pair(1, 0)
 
-        val matcher = ForwardHorizontalMatcher(grid, word)
+        val matcher = ForwardHorizontalMatcher(grid, word, direction)
         val matchesHorizontalForward = startingCoordinates.filter { coord -> matcher.coordinateStartsMatch(coord) }
         if(matchesHorizontalForward.isEmpty()) {
             return emptyList()
         } else {
             val firstMatch = matchesHorizontalForward.get(0)
-            return List<Pair<Int, Int>>(word.length) { it -> Pair(firstMatch.first + it, firstMatch.second) }
+            return List<Pair<Int, Int>>(word.length) { it -> Pair(firstMatch.first + (it * direction.first), firstMatch.second + (it * direction.second)) }
         }
     }
 
 }
 
-class ForwardHorizontalMatcher(private val grid: List<List<String>>, val word: String) {
+class ForwardHorizontalMatcher(private val grid: List<List<String>>, val word: String, val direction: Pair<Int, Int>) {
 
     fun coordinateStartsMatch(coordinate: Pair<Int, Int>): Boolean {
-        val direction = Pair(1, 0)
 
         // TODO: honor direction
         if (coordinate.first + word.length > grid[0].size) {
