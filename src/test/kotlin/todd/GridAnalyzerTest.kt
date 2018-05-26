@@ -11,20 +11,24 @@ class GridAnalyzerTest {
 
     @Test
     fun `analyzer finds coordinates for the first letter of a word to find`() {
-        val coordinates: List<Pair<Int, Int>> = analyzer.coordinatesForFirstLetterInWord("Bones")
-        assert(coordinates).containsExactly(
-                Pair(2, 11),
-                Pair(3, 0),
-                Pair(6, 0),
-                Pair(7, 11),
-                Pair(10, 7),
-                Pair(10, 9),
-                Pair(11, 3),
-                Pair(11, 6),
-                Pair(12, 11),
-                Pair(13, 9),
-                Pair(14, 3),
+        assert(analyzer.coordinatesForFirstLetterInWord("Bones")).containsExactly(
+                Pair(11, 2),
+                Pair(0, 3),
+                Pair(0, 6),
+                Pair(11, 7),
+                Pair(7, 10),
+                Pair(9, 10),
+                Pair(3, 11),
+                Pair(6, 11),
+                Pair(11, 12),
+                Pair(9, 13),
+                Pair(3, 14),
                 Pair(14, 14)
         )
+    }
+
+    @Test
+    fun `analyzer finds word horizontal forward`() {
+        assert(analyzer.find("SCOTTY")).containsExactly(Pair(0,5), Pair(1,5), Pair(2,5), Pair(3,5), Pair(4,5), Pair(5,5))
     }
 }
