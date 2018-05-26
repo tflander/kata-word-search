@@ -48,12 +48,17 @@ class GridAnalyzer(val grid: List<List<String>>) {
 }
 
 class ForwardHorizontalMatcher(private val grid: List<List<String>>, val word: String) {
+
     fun coordinateStartsMatch(coordinate: Pair<Int, Int>): Boolean {
+        val direction = Pair(1, 0)
+
+        // TODO: honor direction
         if (coordinate.first + word.length > grid[0].size) {
             return false
         }
+
         for (i in 1 until word.length) {
-            if (word[i] != grid.get(coordinate.second).get(coordinate.first + i)[0]) {
+            if (word[i] != grid.get(coordinate.second + (i * direction.second)).get(coordinate.first + (i * direction.first))[0]) {
                 return false
             }
         }
