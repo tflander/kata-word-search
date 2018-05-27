@@ -13,34 +13,36 @@ G,H,I"""
 
     val grid = WordSearch(simple).grid
     val forwardDirection = Pair(1, 0)
+    val backwardDirection = Pair(-1, 0)
 
     @Test
-    fun `matches EF at correct position`() {
-        val matcher = ForwardHorizontalMatcher(grid, "EF", forwardDirection)
-        assert(matcher.coordinateStartsMatch(Pair(1,1))).isTrue()
-    }
-
-    @Test
-    fun `does not matche EF at incorrect position`() {
+    fun `does not match at incorrect position`() {
         val matcher = ForwardHorizontalMatcher(grid, "EF", forwardDirection)
         assert(matcher.coordinateStartsMatch(Pair(1,0))).isFalse()
     }
 
     @Test
-    fun `does not match FG and does not error`() {
+    fun `matches EF forward horizonal at correct position`() {
+        val matcher = ForwardHorizontalMatcher(grid, "EF", forwardDirection)
+        assert(matcher.coordinateStartsMatch(Pair(1,1))).isTrue()
+    }
+
+    @Test
+    fun `forward horizonal matching does not error with out of bounds`() {
         val matcher = ForwardHorizontalMatcher(grid, "FG", forwardDirection)
         assert(matcher.coordinateStartsMatch(Pair(2,1))).isFalse()
     }
 
     @Test
-    fun `matches DEF`() {
-        val matcher = ForwardHorizontalMatcher(grid, "DEF", forwardDirection)
-        assert(matcher.coordinateStartsMatch(Pair(0,1))).isTrue()
+    fun `matches FE backward horizontal at correct position`() {
+        val matcher = ForwardHorizontalMatcher(grid, "ED", backwardDirection)
+        assert(matcher.coordinateStartsMatch(Pair(1,1))).isTrue()
     }
 
     @Test
-    fun `does not match DEG`() {
-        val matcher = ForwardHorizontalMatcher(grid, "DEG", forwardDirection)
+    fun `backward horizonal matching does not error with out of bounds`() {
+        val matcher = ForwardHorizontalMatcher(grid, "DC", backwardDirection)
         assert(matcher.coordinateStartsMatch(Pair(0,1))).isFalse()
     }
+
 }

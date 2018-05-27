@@ -19,7 +19,7 @@ class GridAnalyzer(val grid: List<List<String>>) {
     fun coordinatesForFirstLetterInWord(word: String): List<Pair<Int, Int>> {
         val firstLetterInWord = word.substring(0, 1)
 
-        // TODO: refactor imperitive logic
+        // TODO: refactor imperative logic
         var result = emptyList<Pair<Int, Int>>()
         for (r in 0 until grid.size) {
             val row = grid.get(r)
@@ -52,8 +52,8 @@ class ForwardHorizontalMatcher(private val grid: List<List<String>>, val word: S
 
     fun coordinateStartsMatch(coordinate: Pair<Int, Int>): Boolean {
 
-        // TODO: honor direction
-        if (coordinate.first + word.length > grid[0].size) {
+        val horizontalBorder = coordinate.first + (direction.first * word.length)
+        if (horizontalBorder > grid[0].size || horizontalBorder < -1) {
             return false
         }
 
