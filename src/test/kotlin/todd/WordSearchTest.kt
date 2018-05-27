@@ -28,5 +28,11 @@ class WordSearchTest {
         assert(game.find("SCOTTY")).containsExactly(Pair(0,5), Pair(1,5), Pair(2,5), Pair(3,5), Pair(4,5), Pair(5,5))
     }
 
+    @Test
+    @Ignore // TODO: implement
+    fun `finds KIRK by searching horizontally backwards`() {
+        assert(game.find("KIRK")).containsExactly(Pair(4,7), Pair(3,7), Pair(2,7), Pair(1,7))
+    }
+
     // TODO: Grid Builder tests for invalid setup
 }

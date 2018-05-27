@@ -4,7 +4,7 @@ import org.junit.Test
 import assertk.assert
 import assertk.assertions.*
 
-class ForwardHorizontalMatcherTest {
+class WordMatcherTest {
 
     val simple = """
 A,B,C
@@ -17,31 +17,31 @@ G,H,I"""
 
     @Test
     fun `does not match at incorrect position`() {
-        val matcher = ForwardHorizontalMatcher(grid, "EF", forwardDirection)
+        val matcher = WordMatcher(grid, "EF", forwardDirection)
         assert(matcher.coordinateStartsMatch(Pair(1,0))).isFalse()
     }
 
     @Test
     fun `matches EF forward horizonal at correct position`() {
-        val matcher = ForwardHorizontalMatcher(grid, "EF", forwardDirection)
+        val matcher = WordMatcher(grid, "EF", forwardDirection)
         assert(matcher.coordinateStartsMatch(Pair(1,1))).isTrue()
     }
 
     @Test
     fun `forward horizonal matching does not error with out of bounds`() {
-        val matcher = ForwardHorizontalMatcher(grid, "FG", forwardDirection)
+        val matcher = WordMatcher(grid, "FG", forwardDirection)
         assert(matcher.coordinateStartsMatch(Pair(2,1))).isFalse()
     }
 
     @Test
     fun `matches FE backward horizontal at correct position`() {
-        val matcher = ForwardHorizontalMatcher(grid, "ED", backwardDirection)
+        val matcher = WordMatcher(grid, "ED", backwardDirection)
         assert(matcher.coordinateStartsMatch(Pair(1,1))).isTrue()
     }
 
     @Test
     fun `backward horizonal matching does not error with out of bounds`() {
-        val matcher = ForwardHorizontalMatcher(grid, "DC", backwardDirection)
+        val matcher = WordMatcher(grid, "DC", backwardDirection)
         assert(matcher.coordinateStartsMatch(Pair(0,1))).isFalse()
     }
 

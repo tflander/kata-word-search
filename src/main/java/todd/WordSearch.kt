@@ -36,19 +36,19 @@ class GridAnalyzer(val grid: List<List<String>>) {
         val startingCoordinates = coordinatesForFirstLetterInWord(word)
         val direction = Pair(1, 0)
 
-        val matcher = ForwardHorizontalMatcher(grid, word, direction)
-        val matchesHorizontalForward = startingCoordinates.filter { coord -> matcher.coordinateStartsMatch(coord) }
-        if(matchesHorizontalForward.isEmpty()) {
+        val matcher = WordMatcher(grid, word, direction)
+        val matchesForDirection = startingCoordinates.filter { coord -> matcher.coordinateStartsMatch(coord) }
+        if(matchesForDirection.isEmpty()) {
             return emptyList()
         } else {
-            val firstMatch = matchesHorizontalForward.get(0)
+            val firstMatch = matchesForDirection.get(0)
             return List<Pair<Int, Int>>(word.length) { it -> Pair(firstMatch.first + (it * direction.first), firstMatch.second + (it * direction.second)) }
         }
     }
 
 }
 
-class ForwardHorizontalMatcher(private val grid: List<List<String>>, val word: String, val direction: Pair<Int, Int>) {
+class WordMatcher(private val grid: List<List<String>>, val word: String, val direction: Pair<Int, Int>) {
 
     fun coordinateStartsMatch(coordinate: Pair<Int, Int>): Boolean {
 
@@ -57,7 +57,7 @@ class ForwardHorizontalMatcher(private val grid: List<List<String>>, val word: S
             return false
         }
 
-        for (i in 1 until word.length) {
+        for (i in 0 until word.length) {
             if (word[i] != grid.get(coordinate.second + (i * direction.second)).get(coordinate.first + (i * direction.first))[0]) {
                 return false
             }
