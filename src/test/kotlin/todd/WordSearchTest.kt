@@ -29,7 +29,6 @@ class WordSearchTest {
     }
 
     @Test
-    @Ignore // TODO: implement
     fun `finds KIRK by searching horizontally backwards`() {
         assert(game.find("KIRK")).containsExactly(Pair(4,7), Pair(3,7), Pair(2,7), Pair(1,7))
     }

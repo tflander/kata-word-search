@@ -33,12 +33,23 @@ class GridAnalyzer(val grid: List<List<String>>) {
     }
 
     fun find(word: String): List<Pair<Int, Int>> {
-        val startingCoordinates = coordinatesForFirstLetterInWord(word)
-        val direction = Pair(1, 0)
+        for(x in -1..1) {
+            for(y in -1..1) {
+                if(x != 0 || y != 0) {
+                    val matchesforDirection = findMatchesforDirection(word, Pair(x, y))
+                    if (matchesforDirection.isNotEmpty()) {
+                        return matchesforDirection
+                    }
+                }
+            }
+        }
+        return emptyList()
+    }
 
+    private fun findMatchesforDirection(word: String, direction: Pair<Int, Int>): List<Pair<Int, Int>> {
         val matcher = WordMatcher(grid, word, direction)
-        val matchesForDirection = startingCoordinates.filter { coord -> matcher.coordinateStartsMatch(coord) }
-        if(matchesForDirection.isEmpty()) {
+        val matchesForDirection = coordinatesForFirstLetterInWord(word).filter { coord -> matcher.coordinateStartsMatch(coord) }
+        if (matchesForDirection.isEmpty()) {
             return emptyList()
         } else {
             val firstMatch = matchesForDirection.get(0)
@@ -53,7 +64,11 @@ class WordMatcher(private val grid: List<List<String>>, val word: String, val di
     fun coordinateStartsMatch(coordinate: Pair<Int, Int>): Boolean {
 
         val horizontalBorder = coordinate.first + (direction.first * word.length)
-        if (horizontalBorder > grid[0].size || horizontalBorder < -1) {
+        val verticalBorder = coordinate.second + (direction.second * word.length)
+        if (horizontalBorder > grid[0].size ||
+                horizontalBorder < -1 ||
+                verticalBorder > grid.size ||
+                verticalBorder < -1) {
             return false
         }
 
